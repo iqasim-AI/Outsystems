@@ -19,7 +19,6 @@ outsystems-claude/
 │       ├── create-block.md           /create-block
 │       ├── create-screen.md          /create-screen
 │       ├── create-rest-api.md        /create-rest-api
-│       ├── consume-rest-api.md       /consume-rest-api
 │       └── consume-endpoint.md       /consume-endpoint
 ├── prompts/
 │   └── examples/                  # Proven example requests to copy from
@@ -56,8 +55,7 @@ Build a feature one small step at a time, in this order:
 | 5 | `/create-block` | `_UI` |
 | 6 | `/create-screen` | `Portal` |
 | 7 | `/create-rest-api` (expose an API) | `_API` |
-| 8 | `/consume-rest-api` (call an external API) | `_IS` |
-| 9 | `/consume-endpoint` (new endpoint copying an existing module's pattern) | `_IS` |
+| 8 | `/consume-endpoint` (new endpoint copying an existing module's pattern) | `_IS` |
 
 Each command shows a plan first. Check it, then approve.
 See `prompts/examples/` for full sample requests.
