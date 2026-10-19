@@ -4,11 +4,8 @@
 > Keep it short and specific. Update via pull request. Owner: [NAME]
 
 ## 1. About this team
-- Team of 5 developers building on OutSystems [ODC / O11 — pick one].
+- Team of 5 developers building on OutSystems [O11 — pick one].
 - Tenant: `https://[YOUR-TENANT]` (MCP connection is in `.mcp.json`).
-- Main apps we work on:
-  - [App name] — [one-line purpose]
-  - [App name] — [one-line purpose]
 - Business language: [English / Arabic]. UI labels must support [RTL / LTR].
 
 ## 2. Environments — read carefully
@@ -16,6 +13,7 @@
 |---|---|---|
 | Development | Daily work | Edit, publish |
 | Test / QA | Testing | Read only — ask before deploying |
+| Pre-Producation| Testing | **Never edit, publish or deploy**  |
 | Production | Live users | **Never edit, publish or deploy** |
 
 - Always confirm the target environment before any publish or deploy.
