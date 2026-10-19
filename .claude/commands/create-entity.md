@@ -20,7 +20,8 @@ Rules:
    - Add indexes for foreign keys and fields used in search or filters.
    - Public = Yes, Expose Read Only = Yes (writes go only through CRUD actions).
    - If a field is a fixed list of values, propose a Static Entity instead of Text.
+   - Must Add Description to each attributes , the audit attributes set default description , the foreign keys take description from original table. 
 4. Show the plan first as a table:
-   Attribute | Type | Length | Mandatory | Default | Notes — then wait for my approval.
+   Attribute | Type | Length | Mandatory | Default |Description |Notes — then wait for my approval.
 5. After approval: create the entity, resolve the warning about this entity, publish the module to Development, and report
    what was created, the module, and the environment.
