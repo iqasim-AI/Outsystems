@@ -53,7 +53,7 @@ Build a feature one small step at a time, in this order:
 | 3 | `/create-logic` | `_BL` |
 | 4 | `/create-service-action` | `_SL` |
 | 5 | `/create-block` | `_UI` |
-| 6 | `/create-screen` | `_UI` |
+| 6 | `/create-screen` | `Portal` |
 | 7 | `/create-rest-api` (expose an API) | `_API` |
 | 8 | `/consume-rest-api` (call an external API) | `_IS` |
 
