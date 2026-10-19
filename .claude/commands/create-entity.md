@@ -22,5 +22,5 @@ Rules:
    - If a field is a fixed list of values, propose a Static Entity instead of Text.
 4. Show the plan first as a table:
    Attribute | Type | Length | Mandatory | Default | Notes — then wait for my approval.
-5. After approval: create the entity, publish the module to Development, and report
+5. After approval: create the entity, resolve the warning about this entity, publish the module to Development, and report
    what was created, the module, and the environment.
