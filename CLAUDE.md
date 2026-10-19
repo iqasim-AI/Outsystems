@@ -4,7 +4,7 @@
 > Keep it short and specific. Update via pull request. Owner: [NAME]
 
 ## 1. About this team
-- Team of 5 developers building on OutSystems [O11 — pick one].
+- Team of 22 developers building on OutSystems [O11 — pick one].
 - Tenant: `https://[YOUR-TENANT]` (MCP connection is in `.mcp.json`).
 - Business language: [English / Arabic]. UI labels must support [RTL / LTR].
 
