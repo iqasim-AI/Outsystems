@@ -1,0 +1,12 @@
+# Personal Claude files — never commit
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.*
+secrets/
+
+# OS files
+.DS_Store
+Thumbs.db

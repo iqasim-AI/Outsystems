@@ -4,7 +4,7 @@
 > Keep it short and specific. Update via pull request. Owner: [NAME]
 
 ## 1. About this team
-- Team of 5 developers building on OutSystems [O11 — pick one].
+- Team of 5 developers building on OutSystems [ODC / O11 — pick one].
 - Tenant: `https://[YOUR-TENANT]` (MCP connection is in `.mcp.json`).
 - Main apps we work on:
   - [App name] — [one-line purpose]
@@ -22,17 +22,35 @@
 - If unsure which environment you are in, stop and ask.
 
 ## 3. Architecture
-- We follow the OutSystems layered architecture:
-  - **Foundation** — reusable, non-business (themes, connectors, utilities)
-  - **Core** — business entities and logic
-  - **End-user** — screens and UI flows
-- Upper layers may reference lower layers only. Never the reverse.
-- No business logic in End-user modules; put it in Core server actions.
+- Each domain is split into these modules (top calls down, never up):
+
+| Layer | Module | Contains | May call |
+|---|---|---|---|
+| UI | `[Domain]_UI` | Screens, blocks, client actions | `_SL` service actions [confirm: also `_BL`?] |
+| Service | `[Domain]_SL` | Service actions (public API of the domain) | `_SL` of other domains, `_BL`, `_CS` server actions |
+| Logic | `[Domain]_BL` | Business-logic server actions | `_CS` CRUD actions, other `_BL`, server actions of other modules, `_SL` service actions of OTHER domains |
+| Core | `[Domain]_CS` | Entities, static entities, CRUD server actions | Foundation only |
+| Foundation | `_IS`, `_Th`, libs | Integrations, theme, utilities | — |
+
+- Entities and CRUD live ONLY in `_CS`. No other module writes to entities directly.
+- Business rules live ONLY in `_BL`. They write data by calling `_CS` CRUD actions.
+- A `_BL` action may call server actions from other modules and service actions from
+  OTHER domains' `_SL`. It must never call its own domain's `_SL` (that `_SL` already
+  references this `_BL` — it would be circular).
+- When `_BL` calls a service action, that call commits on its own: if the `_BL` action
+  fails afterwards, the service action's changes are NOT rolled back. Call service actions
+  last, or add compensation (undo) logic.
+- Service actions live ONLY in `_SL`. They are thin: call `_BL` / `_CS` / other `_SL`, no business rules.
+- A service action may call another service action or a server action from a different module.
+  Each service action runs in its own transaction: if one call commits and a later one fails,
+  the first is NOT rolled back. For multi-step writes that must be all-or-nothing, put them
+  in one `_BL` server action instead, or add compensation logic.
+- Never create circular references between modules.
 - Shared libraries: [list e.g. Common_Lib, Theme_Lib]
 
 ## 4. Naming conventions
-- Modules: `[Domain]_[Layer]` (e.g. `Customer_CS`, `Customer_UI`)
-  - Suffixes: `_CS` core services, `_UI` end-user, `_IS` integration, `_Th` theme
+- Modules: `[Domain]_[Layer]` (e.g. `Customer_CS`, `Customer_BL`, `Customer_SL`, `Customer_UI`)
+  - Suffixes: `_CS` core/CRUD, `_BL` business logic, `_SL` service layer, `_UI` end-user, `_IS` integration, `_Th` theme
 - Entities: singular, PascalCase (`Customer`, `OrderItem`)
 - Attributes: PascalCase; foreign keys end with `Id` (`CustomerId`)
 - Server actions: verb first (`Customer_Create`, `Order_GetById`)
