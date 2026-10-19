@@ -26,6 +26,7 @@
 
 | Layer | Module | Contains | May call |
 |---|---|---|---|
+| API | `[Domain]_API` | Exposed REST APIs (thin: contract, auth, validation) | `_SL` service actions [confirm: also `_BL`?] |
 | UI | `[Domain]_UI` | Screens, blocks, client actions | `_SL` service actions [confirm: also `_BL`?] |
 | Service | `[Domain]_SL` | Service actions (public API of the domain) | `_SL` of other domains, `_BL`, `_CS` server actions |
 | Logic | `[Domain]_BL` | Business-logic server actions | `_CS` CRUD actions, other `_BL`, server actions of other modules, `_SL` service actions of OTHER domains |
@@ -45,12 +46,15 @@
   Each service action runs in its own transaction: if one call commits and a later one fails,
   the first is NOT rolled back. For multi-step writes that must be all-or-nothing, put them
   in one `_BL` server action instead, or add compensation logic.
+- Exposed REST APIs live ONLY in `_API`. Consumed external APIs live ONLY in `[System]_IS`;
+  `_BL` calls the `_IS` wrapper action, never the external system directly.
 - Never create circular references between modules.
 - Shared libraries: [list e.g. Common_Lib, Theme_Lib]
 
 ## 4. Naming conventions
 - Modules: `[Domain]_[Layer]` (e.g. `Customer_CS`, `Customer_BL`, `Customer_SL`, `Customer_UI`)
-  - Suffixes: `_CS` core/CRUD, `_BL` business logic, `_SL` service layer, `_UI` end-user, `_IS` integration, `_Th` theme
+  - Suffixes: `_CS` core/CRUD, `_BL` business logic, `_SL` service layer, `_API` exposed REST, `_UI` end-user, `_IS` integration, `_Th` theme
+- REST methods: PascalCase name (`CheckVehiclesEligibility`); URL kebab-case and versioned (`/v1/vehicles/check-eligibility`); JSON fields camelCase
 - Entities: singular, PascalCase (`Customer`, `OrderItem`)
 - Attributes: PascalCase; foreign keys end with `Id` (`CustomerId`)
 - Server actions: verb first (`Customer_Create`, `Order_GetById`)
