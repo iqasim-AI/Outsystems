@@ -8,7 +8,7 @@ Create ONE OutSystems entity. Do only this step — no actions, no screens.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md (naming, layers, environments). Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/ (naming, layers, environments). Work in Development only.
 2. Use the OutSystems MCP to inspect the target Core module first. If the entity
    or a similar one already exists, stop and tell me.
 3. Entity design:

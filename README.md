@@ -8,9 +8,10 @@ connection, and the same commands.
 
 ```
 outsystems-claude/
-├── CLAUDE.md                      # Team rules Claude reads automatically
+├── CLAUDE.md                      # Team facts + index of the rules
 ├── .mcp.json                      # OutSystems MCP connection (no secrets)
 ├── .claude/
+│   ├── rules/                     # Detailed team rules (architecture, naming, ...)
 │   └── commands/                  # Team slash commands
 │       ├── create-entity.md          /create-entity
 │       ├── create-crud.md            /create-crud
@@ -64,7 +65,7 @@ Always run `git pull` before you start, so you have the latest rules.
 
 ## Sharing what you learn
 
-- Claude got something wrong? Add a line to **section 9 "Lessons learned"** in `CLAUDE.md`.
+- Claude got something wrong? Add a line to **"Lessons learned"** in `.claude/rules/never-do.md`.
 - Found a prompt that works well? Add it to `prompts/examples/`.
 - Make changes on a branch and open a pull request. The owner reviews and merges.
 

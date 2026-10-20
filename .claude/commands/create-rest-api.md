@@ -8,7 +8,7 @@ Expose ONE REST API method. Do only this step — no business rules, no CRUD, no
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md. Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/. Work in Development only.
 2. The REST API lives in `[Domain]_API`. It is a thin wrapper: it calls a `_SL` service
    action (or `_BL` server action) that holds the logic. If that action doesn't exist,
    stop and tell me which command to run first (`/create-logic`, `/create-service-action`).

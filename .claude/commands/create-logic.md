@@ -9,7 +9,7 @@ no CRUD, no service action, no UI.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md (section 3 layers). Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/ (see architecture.md for the layers). Work in Development only.
 2. The action goes in `[Domain]_BL`. If the request names another module, stop and ask.
 3. Use the OutSystems MCP to search `_BL` and `_CS` for actions that already do this
    or part of it. Reuse them; don't duplicate.
@@ -32,7 +32,7 @@ Rules:
    - Server-action calls share this action's transaction, so an exception rolls them all
      back — use this for all-or-nothing work. Service-action calls are the exception (see above).
    - Use Aggregates for reads; Advanced SQL only if needed — explain why.
-   - Log errors using the standard pattern in CLAUDE.md.
+   - Log errors using the standard pattern in .claude/rules/coding.md.
 6. Show the plan first: module, inputs, outputs, step-by-step flow, every action it calls
    (with its module and whether it is a server or service action), references needed,
    transaction risks, possible errors. Wait for my approval.

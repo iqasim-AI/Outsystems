@@ -9,17 +9,17 @@ don't create new logic.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md. Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/. Work in Development only.
 2. Use the OutSystems MCP to check the UI module, existing screens, blocks, and the
    Core actions for this entity. If a needed block or action is missing, stop and tell
    me which command to run first (`/create-crud`, `/create-block`, ...).
 3. Screen design:
    - Name: PascalCase noun, e.g. `CustomerList`, `CustomerDetail`.
-   - Set the allowed roles (from CLAUDE.md) — no anonymous access unless I say so.
+   - Set the allowed roles (from .claude/rules/security-roles.md) — no anonymous access unless I say so.
    - Use the app's layout and menu; add a menu entry if it's a main screen.
 4. List screen:
    - Aggregate with only the needed attributes; search box and filters.
-   - Pagination (page size from CLAUDE.md), sorting on main columns.
+   - Pagination (page size from .claude/rules/coding.md), sorting on main columns.
    - Empty state message; "New" button to the detail screen; delete with confirmation.
 5. Detail screen:
    - Input parameter `<Entity>Id` (NullIdentifier = new record).

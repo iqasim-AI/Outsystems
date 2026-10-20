@@ -9,7 +9,7 @@ no business rules, no service actions, no UI.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md. Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/. Work in Development only.
 2. Use the OutSystems MCP to read the entity first. If it doesn't exist, stop and tell me.
    If any of these actions already exist, list them and ask before changing.
 3. Create these server actions in the `[Domain]_CS` module (same module as the entity),
@@ -20,7 +20,7 @@ Rules:
    - `<Entity>_Delete` — input: Id
    - `<Entity>_GetById` — input: Id; output: Entity record (use an Aggregate)
 4. Inside every write action:
-   - Check the user's role (use the roles in CLAUDE.md) before any change.
+   - Check the user's role (use the roles in .claude/rules/security-roles.md) before any change.
    - Validate mandatory fields; raise a clear user exception if invalid.
    - Set audit fields: CreatedOn/CreatedBy on create, UpdatedOn/UpdatedBy on update.
    - Delete: check the record exists; respect delete rules; never delete without the Id.

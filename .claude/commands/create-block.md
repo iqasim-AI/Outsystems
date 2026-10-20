@@ -8,7 +8,7 @@ Create ONE reusable block. Do only this step — no screen, no new server logic.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md. Work in Development only. Blocks live in the End-user (UI) module
+1. Follow CLAUDE.md and .claude/rules/. Work in Development only. Blocks live in the End-user (UI) module
    or a shared UI library if reused across apps — ask me which.
 2. Use the OutSystems MCP to check existing blocks and the theme first. Reuse patterns
    and styles; don't invent new CSS if the theme has a class for it.

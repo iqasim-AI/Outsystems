@@ -9,7 +9,7 @@ no business rules, no CRUD, no UI.
 Request: $ARGUMENTS
 
 Rules:
-1. Follow CLAUDE.md (section 3 layers). Work in Development only.
+1. Follow CLAUDE.md and .claude/rules/ (see architecture.md for the layers). Work in Development only.
 2. The service action goes in `[Domain]_SL`. If the request names another module, stop and ask.
 3. Use the OutSystems MCP to read every action it will call. If one doesn't exist,
    stop and tell me which command to run first (`/create-crud` or `/create-logic`).
