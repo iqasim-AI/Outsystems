@@ -38,6 +38,18 @@ The action lives in `[Domain]_BL`. If the request names another module, stop and
   actions inside loops.
 - Log errors as described in `.claude/rules/coding.md`.
 
+## Standard save and delete
+Every entity that a screen or block writes to has these two actions in `_BL`, so the UI
+never calls `_CS` CRUD directly. When the request is just `<Entity>_Save` or
+`<Entity>_Delete` with no extra rules, build exactly this:
+- `<Entity>_Save` — input: Entity record; output: Id.
+  Check the role → validate mandatory fields and formats → apply the business rules the
+  request lists (if any) → call `<Entity>_CreateOrUpdate` (`_CS`) → return the Id.
+- `<Entity>_Delete` — input: Id.
+  Check the role → check the record exists and may be deleted (e.g. status rules the
+  request lists) → call `<Entity>_Delete` (`_CS`).
+Both raise User Exceptions with clear messages for every rule they reject.
+
 ## create
 1. Use the OutSystems MCP to search `_BL` and `_CS` for actions that already do this or
    part of it. Reuse them; don't duplicate. If the same action exists, stop (I may want `edit`).

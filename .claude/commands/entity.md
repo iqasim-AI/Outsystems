@@ -30,6 +30,8 @@ Entities live ONLY in `[Domain]_CS`. If the request names another module, stop a
    one already exists, stop and tell me (I may want `edit`).
 2. Show the plan as a table:
    Attribute | Type | Length | Mandatory | Default | Description | Notes — then wait for my approval.
+   For a **static entity** (plural name, e.g. `InspectionStatuses`), the request gives the
+   records; show them as a table: Identifier | Label | Order | Description.
 3. After approval: create the entity, resolve the warnings about it, publish the module
    to Development, and report what was created, the module and the environment.
 
