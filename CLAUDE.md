@@ -18,6 +18,7 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `naming.md` | Modules, entities, attributes, actions, screens, REST |
 | `coding.md` | Aggregates, pagination, validation, exceptions |
 | `security-roles.md` | Roles, secrets, hard-coded values |
+| `testing.md` | BDDFramework unit tests — what to test, test data, test users, when to run |
 | `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
 | `never-do.md` | Hard limits and lessons learned |
 
