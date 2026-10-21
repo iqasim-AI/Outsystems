@@ -17,6 +17,7 @@ outsystems-claude/
 │       ├── entity.md          /entity create|edit
 │       ├── crud.md            /crud create|edit
 │       ├── logic.md           /logic create|edit
+│       ├── test.md            /test create|edit (BDDFramework unit tests)
 │       ├── service-action.md  /service-action create|edit
 │       ├── block.md           /block create|edit
 │       ├── screen.md          /screen create|edit
@@ -69,6 +70,7 @@ Build or change a feature one small step at a time, in this order:
 | 1 | `/entity create\|edit` | `_CS` |
 | 2 | `/crud create\|edit` | `_CS` |
 | 3 | `/logic create\|edit` | `_BL` |
+| 3a | `/test create\|edit` (unit tests for the `_BL` action, right after it) | `[Domain]_Tests` |
 | 4 | `/service-action create\|edit` (only for other domains/apps) | `_SL` |
 | 5 | `/block create\|edit` | `_UI` or `_CW` |
 | 6 | `/screen create\|edit` | `_UI` |

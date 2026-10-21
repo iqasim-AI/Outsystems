@@ -57,6 +57,7 @@ Both raise User Exceptions with clear messages for every rule they reject.
    its module and whether it is a server or service action), references needed,
    transaction risks, possible errors. Wait for my approval.
 3. After approval: create, publish `_BL` to Development, and report what was created.
+   End the report with the `/test create` command to run next.
 
 ## edit
 Follow `.claude/rules/editing.md`, plus these logic rules:
@@ -72,3 +73,5 @@ Follow `.claude/rules/editing.md`, plus these logic rules:
   call means re-checking where it sits in the flow and whether compensation is needed.
 - **Reordering steps**: say how it changes what is rolled back on failure.
 - The plan shows the flow before and after, with the changed steps marked.
+- If the action has tests (`<ActionName>_Tests` in `[Domain]_Tests`), end the report with
+  the `/test edit` command to run next, listing the rules that changed.

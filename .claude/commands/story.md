@@ -8,8 +8,8 @@ argument-hint: <Feature name> in <Domain>: <user story and acceptance criteria>
 User story: $ARGUMENTS
 
 Turn this user story into the list of team commands the developer will run **one by one**
-(`/entity`, `/crud`, `/logic`, `/service-action`, `/api-consume`, `/api-expose`, `/block`,
-`/screen`). Follow CLAUDE.md and .claude/rules/.
+(`/entity`, `/crud`, `/logic`, `/test`, `/service-action`, `/api-consume`, `/api-expose`,
+`/block`, `/screen`). Follow CLAUDE.md and .claude/rules/.
 
 **This command builds nothing.** Use the OutSystems MCP only to read. Do not create, change
 or publish anything.
@@ -59,8 +59,10 @@ Order (dependencies first):
 2. Entities — parents before children
 3. CRUD (`/crud create`, or `/crud edit` for existing entities)
 4. `_IS` endpoints (`/api-consume`) the logic needs
-5. `_BL` actions — Save/Delete first, then one per button
-6. Service actions — only if needed
+5. `_BL` actions — Save/Delete first, then one per button. **Right after each `/logic
+   create`, add its `/test create`**, with the scenarios from the acceptance criteria
+   that this action enforces (see `testing.md`).
+6. Service actions — only if needed, each followed by its `/test create`
 7. Blocks — only if reused
 8. Screens — list first, then detail
 9. `_API` methods — only if needed
@@ -78,7 +80,9 @@ End with:
 - Names follow `naming.md`. Each entity, attribute and action in the commands has a short
   description so the command can set it.
 - Do not split one element across two commands, and do not merge two elements into one command.
-- If the story is too large for about 15 commands, split it into smaller stories and say
+- Every acceptance criterion that is a business rule appears in at least one `/test`
+  command. Criteria that are only visible on screen go in "Test the story".
+- If the story is too large for about 20 commands, split it into smaller stories and say
   how, instead of producing one long list.
 - When the developer reports that a command ended differently from the plan (a name taken,
   a field changed), update the remaining commands and show only those again.

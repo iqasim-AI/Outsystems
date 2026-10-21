@@ -1,7 +1,7 @@
 # Example: from user story to commands
 
 `/story` reads the story and what already exists, then gives you the commands to run
-**one by one**. It builds nothing itself. Run each command, check the result, then run the next.
+**one by one**, with a `/test create` right after each `_BL` action. It builds nothing itself. Run each command, check the result, then run the next.
 
 ## The request
 ```
@@ -87,6 +87,16 @@ Sets StatusId = Draft.
 ```
 Check after: an inspector cannot save a request assigned to someone else.
 
+**5a.**
+```
+/test create InspectionRequest_Save in Vehicle_BL:
+- Assigned inspector saves a draft: saved, status Draft
+- Another inspector saves it: rejected (not assigned)
+- test.norole saves it: rejected (role)
+- Saving a Submitted request: rejected "A submitted inspection cannot be changed."
+```
+Check after: all scenarios green.
+
 **6.**
 ```
 /logic create InspectionRequest_Submit in Vehicle_BL:
@@ -97,6 +107,18 @@ Sets StatusId = Submitted.
 ```
 Check after: Failed without notes raises the error.
 
+**6a.**
+```
+/test create InspectionRequest_Submit in Vehicle_BL:
+- Draft + Passed, no notes: submitted
+- Draft + Failed + notes: submitted
+- Draft + Failed, no notes: rejected "Notes are required when the inspection fails", status still Draft
+- Draft, no result: rejected
+- Already Submitted: rejected
+- Another inspector / test.norole: rejected
+```
+Check after: all scenarios green.
+
 **7.**
 ```
 /logic create InspectionRequest_Reassign in Vehicle_BL:
@@ -105,6 +127,16 @@ Rules: status must not be Submitted; new inspector must have the Inspector role.
 Sets InspectorId = NewInspectorId and StatusId = Assigned.
 ```
 Check after: a submitted request cannot be reassigned.
+
+**7a.**
+```
+/test create InspectionRequest_Reassign in Vehicle_BL:
+- Supervisor reassigns an Assigned request: new inspector set, status Assigned
+- Supervisor reassigns a Submitted request: rejected
+- New user without the Inspector role: rejected
+- test.inspector tries to reassign: rejected (role)
+```
+Check after: all scenarios green.
 
 **8.**
 ```
@@ -132,7 +164,7 @@ Role: Inspector.
 ```
 Check after: a submitted inspection opens read-only.
 
-**Test the story**
+**Test the story** (on screen, after all unit tests are green)
 1. As an inspector, the list shows only your requests.
 2. Open one, choose Failed, leave Notes empty, Submit: the error is shown.
 3. Add notes, Submit: the status is Submitted and the form becomes read-only.

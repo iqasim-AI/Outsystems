@@ -4,6 +4,7 @@
 - Never delete entities, attributes or data without explicit approval.
 - Never change shared Foundation modules without telling the team.
 - Never put secrets in this repo or in prompts.
+- Never deploy a `[Domain] Tests` application to Pre-Production or Production.
 
 # Lessons learned
 
