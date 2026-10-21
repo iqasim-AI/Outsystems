@@ -23,6 +23,9 @@ Screens live in `[Domain]_UI`. If the request names another module, stop and ask
 - **Writes**: call the own domain's `_BL` server action (other domains: their `_SL`).
   Never call `_CS` CRUD actions from a screen.
 - One server call per user event (see `coding.md`).
+- Do not keep Service Studio's generated list/detail screens (dragging an entity onto a
+  screen) as they are: they save with entity actions directly in the UI. If you use them as
+  a starting point, rewire every save and delete to the `_BL` actions before publishing.
 - Links to screens in other `_UI` modules are allowed; reusing their blocks or actions is not.
 - **List screen**: search box and filters; pagination (page size from `coding.md`); sorting on
   main columns; empty state message; "New" button to the detail screen; delete with confirmation.

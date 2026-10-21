@@ -13,6 +13,7 @@ outsystems-claude/
 ├── .claude/
 │   ├── rules/                     # Detailed team rules (architecture, naming, ...)
 │   └── commands/                  # Team slash commands
+│       ├── story.md           /story (user story → commands to run)
 │       ├── entity.md          /entity create|edit
 │       ├── crud.md            /crud create|edit
 │       ├── logic.md           /logic create|edit
@@ -51,6 +52,14 @@ Each command is a **topic** followed by an **action**: `create` for something ne
 ```
 /entity create Order in Order_CS, attributes: ...
 /entity edit Order in Order_CS: add DeliveryDate (Date, optional)
+```
+
+**Start from a user story:** `/story` reads the story and what already exists, and gives
+you the commands below, filled in and in order. It builds nothing; you run them one by one.
+See `prompts/examples/10-user-story-to-commands.md`.
+
+```
+/story Vehicle inspection in Vehicle domain: As an inspector I want to ...
 ```
 
 Build or change a feature one small step at a time, in this order:
