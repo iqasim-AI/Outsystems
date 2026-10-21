@@ -4,7 +4,8 @@ Build in this order. Replace the eligibility rules with your real ones.
 
 ## 1. Consume the external system (if eligibility needs outside data)
 ```
-/consume-rest-api GetVehicleStatus in Traffic_IS:
+/api-consume create GetVehicleStatus in Traffic_IS:
+(fill in the full template from example 08; short version below)
 GET {TrafficBaseUrl}/vehicles/{chassisNumber}/status
 Auth: API key in header "x-api-key" from Site Property TrafficApiKey.
 Response: chassisNumber, plateNumber, registrationStatus, hasTrafficViolations,
@@ -15,7 +16,7 @@ Timeout 30s, retry 2 times on timeout/5xx.
 
 ## 2. Business logic (_BL)
 ```
-/create-logic Vehicle_CheckEligibility in Vehicle_BL:
+/logic create Vehicle_CheckEligibility in Vehicle_BL:
 Check if ONE vehicle is eligible.
 
 Inputs: ChassisNumber (Text 17, mandatory), PlateNumber (Text 10, optional)
@@ -38,9 +39,9 @@ Steps:
 Collect ALL reasons (don't stop at the first failure).
 ```
 
-## 3. Service action (_SL) — batch for many vehicles
+## 3. Business logic (_BL) — batch for many vehicles
 ```
-/create-service-action Vehicle_CheckEligibilityBatch in Vehicle_SL:
+/logic create Vehicle_CheckEligibilityBatch in Vehicle_BL:
 Input: List of VehicleRef (ChassisNumber mandatory, PlateNumber optional), max 100.
 Output: List of VehicleEligibilityResult
   (chassisNumber, plateNumber, isEligible, reasons[]),
@@ -51,9 +52,17 @@ One failing vehicle must not fail the whole batch — return its error in reason
 Read-only, so no transaction risk.
 ```
 
-## 4. Expose the REST API (_API)
+## 4. Service action (_SL) — only if other apps need the check
 ```
-/create-rest-api CheckVehiclesEligibility in Vehicle_API:
+/service-action create Vehicle_CheckEligibilityBatch in Vehicle_SL:
+Same inputs and outputs as Vehicle_CheckEligibilityBatch (Vehicle_BL),
+using Structures, not entity records.
+Calls Vehicle_CheckEligibilityBatch (Vehicle_BL). No rules here.
+```
+
+## 5. Expose the REST API (_API)
+```
+/api-expose create CheckVehiclesEligibility in Vehicle_API:
 Add to REST API "VehicleAPI".
 POST /v1/vehicles/check-eligibility
 Auth: Custom — API key in header "x-api-key", validated against
@@ -85,13 +94,14 @@ Response (CheckVehiclesEligibilityResponse):
 Validation: chassisNumber exactly 17 chars, letters and digits only.
 Errors: 400 INVALID_INPUT, 400 LIMIT_EXCEEDED (>100), 401 UNAUTHORIZED,
         500 INTERNAL_ERROR.
-Calls Vehicle_CheckEligibilityBatch (Vehicle_SL).
+Calls Vehicle_CheckEligibilityBatch (Vehicle_BL).
 Log requestId, caller, count, duration. Mask nothing else needed (no personal IDs).
 ```
 
 ## Why it's split this way
 - **Rules live in `_BL`** (one vehicle) and can be reused by screens, batch jobs and the API.
-- **Batching lives in `_SL`**, so other apps can call the same check without REST.
+- **Batching lives in `_BL`**, so the API, screens and timers share it.
+- **`_SL` only wraps it** for other apps that need the check without REST.
 - **`_API` stays thin**: contract, auth, validation, HTTP codes, logging.
 - **External calls are isolated in `_IS`**, with base URL and key in Settings per environment.
 - **Reason codes, not text**: the caller can translate or react to each reason.

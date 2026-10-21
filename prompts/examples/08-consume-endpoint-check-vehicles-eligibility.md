@@ -1,12 +1,12 @@
-# Example: /consume-endpoint for CheckVehiclesEligibility (Infath)
+# Example: /api-consume create for CheckVehiclesEligibility (Infath)
 
 The steps (analyse, copy pattern, error handling, service action, log, verify) live in the
-`/consume-endpoint` command. You only fill in the details of the new endpoint.
+`/api-consume` command. You only fill in the details of the new endpoint.
 
 Copy the block below, change the values for your endpoint, and run it.
 
 ```
-/consume-endpoint
+/api-consume create
 Target module: Integration_ELM_IS
 Reference module (read-only): Eservices_CRM_IS
   - Consumed REST API: APIGEEInfath (with OnBeforeRequest and OnAfterResponse)

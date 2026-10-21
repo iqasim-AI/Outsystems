@@ -1,7 +1,7 @@
 # Example: CRUD for an entity
 
 ```
-/create-crud Order in Order_CS
+/crud create Order in Order_CS
 ```
 
 Creates in `Order_CS`:
@@ -11,9 +11,9 @@ Creates in `Order_CS`:
 - `Order_Delete`
 - `Order_GetById`
 
-To add a lookup by another field, ask for it explicitly:
+To add a lookup by another field later, edit the existing CRUD:
 
 ```
-/create-crud Order in Order_CS — also add Order_GetByRequestId
+/crud edit Order in Order_CS: add Order_GetByRequestId
 (input: RequestId Text, output: Order record, empty if not found)
 ```

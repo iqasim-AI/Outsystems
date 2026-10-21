@@ -3,7 +3,7 @@
 Create the parent entity (`Customer`) first, then the child (`Order`).
 
 ```
-/create-entity Order in Order_CS, attributes:
+/entity create Order in Order_CS, attributes:
 - OrderNumber: Text(20), mandatory, unique
 - OrderDate: Date, mandatory
 - CustomerId: Customer Identifier (from Customer_CS), mandatory, delete rule Protect

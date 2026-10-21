@@ -18,6 +18,7 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `naming.md` | Modules, entities, attributes, actions, screens, REST |
 | `coding.md` | Aggregates, pagination, validation, exceptions |
 | `security-roles.md` | Roles, secrets, hard-coded values |
+| `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
 | `never-do.md` | Hard limits and lessons learned |
 
 Always work in Development only. Confirm the target environment before any publish or deploy.
