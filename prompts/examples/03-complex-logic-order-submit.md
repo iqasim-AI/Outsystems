@@ -1,7 +1,7 @@
 # Example: complex business logic (_BL)
 
 ```
-/create-logic Order_Submit in Order_BL:
+/logic create Order_Submit in Order_BL:
 Submit a draft order for approval.
 
 Inputs: OrderId (mandatory)

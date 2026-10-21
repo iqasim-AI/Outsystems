@@ -13,14 +13,14 @@ outsystems-claude/
 ├── .claude/
 │   ├── rules/                     # Detailed team rules (architecture, naming, ...)
 │   └── commands/                  # Team slash commands
-│       ├── create-entity.md          /create-entity
-│       ├── create-crud.md            /create-crud
-│       ├── create-logic.md           /create-logic
-│       ├── create-service-action.md  /create-service-action
-│       ├── create-block.md           /create-block
-│       ├── create-screen.md          /create-screen
-│       ├── create-rest-api.md        /create-rest-api
-│       └── consume-endpoint.md       /consume-endpoint
+│       ├── entity.md          /entity create|edit
+│       ├── crud.md            /crud create|edit
+│       ├── logic.md           /logic create|edit
+│       ├── service-action.md  /service-action create|edit
+│       ├── block.md           /block create|edit
+│       ├── screen.md          /screen create|edit
+│       ├── api-expose.md      /api-expose create|edit
+│       └── api-consume.md     /api-consume create|edit
 ├── prompts/
 │   └── examples/                  # Proven example requests to copy from
 ├── .gitignore
@@ -45,18 +45,30 @@ outsystems-claude/
 
 ## Daily workflow
 
-Build a feature one small step at a time, in this order:
+Each command is a **topic** followed by an **action**: `create` for something new,
+`edit` for something that already exists.
+
+```
+/entity create Order in Order_CS, attributes: ...
+/entity edit Order in Order_CS: add DeliveryDate (Date, optional)
+```
+
+Build or change a feature one small step at a time, in this order:
 
 | Step | Command | Module |
 |---|---|---|
-| 1 | `/create-entity` | `_CS` |
-| 2 | `/create-crud` | `_CS` |
-| 3 | `/create-logic` | `_BL` |
-| 4 | `/create-service-action` | `_SL` |
-| 5 | `/create-block` | `_UI` |
-| 6 | `/create-screen` | `Portal` |
-| 7 | `/create-rest-api` (expose an API) | `_API` |
-| 8 | `/consume-endpoint` (new endpoint copying an existing module's pattern) | `_IS` |
+| 1 | `/entity create\|edit` | `_CS` |
+| 2 | `/crud create\|edit` | `_CS` |
+| 3 | `/logic create\|edit` | `_BL` |
+| 4 | `/service-action create\|edit` (only for other domains/apps) | `_SL` |
+| 5 | `/block create\|edit` | `_UI` or `_CW` |
+| 6 | `/screen create\|edit` | `_UI` |
+| 7 | `/api-expose create\|edit` (expose an API) | `_API` |
+| 8 | `/api-consume create\|edit` (external endpoint, copying an existing module's pattern) | `_IS` |
+
+Every `edit` first lists who uses the element, says whether the change is breaking, and
+shows a Before | After plan (rules in `.claude/rules/editing.md`).
+See `prompts/examples/09-edit-scenarios.md` for edit requests.
 
 Each command shows a plan first. Check it, then approve.
 See `prompts/examples/` for full sample requests.

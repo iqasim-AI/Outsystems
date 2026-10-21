@@ -1,7 +1,7 @@
 # Example: complex service action (_SL)
 
 ```
-/create-service-action Order_PlaceOrder in Order_SL:
+/service-action create Order_PlaceOrder in Order_SL:
 Public API for other apps to place a full order in one call.
 
 Input: OrderRequest (Structure, create in Order_SL)
@@ -51,6 +51,6 @@ technical details.
 - **Error codes**: calling apps can react without parsing text.
 
 ## Build these first
-- `RequestId` attribute on `Order` → `/create-entity`
-- `Order_GetByRequestId` → `/create-crud`
-- `Order_CreateWithItems`, `Order_Cancel` → `/create-logic`
+- `RequestId` attribute on the existing `Order` entity → `/entity edit`
+- `Order_GetByRequestId` → `/crud edit`
+- `Order_CreateWithItems`, `Order_Cancel` → `/logic create`

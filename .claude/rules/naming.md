@@ -1,7 +1,7 @@
 # Naming conventions
 
 - Modules: `[Domain]_[Layer]` (e.g. `Customer_CS`, `Customer_BL`, `Customer_SL`, `Customer_UI`)
-  - Suffixes: `_CS` core/CRUD, `_BL` business logic, `_SL` service layer, `_API` exposed REST, `_UI` end-user, `_IS` integration, `_Th` theme
+  - Suffixes: `_CS` core/CRUD, `_BL` business logic, `_SL` service layer, `_API` exposed REST, `_UI` end-user, `_CW` reusable business blocks, `_IS` integration, `_Th` theme, `_Lib` library
 - REST methods: PascalCase name (`CheckVehiclesEligibility`); URL kebab-case and versioned (`/v1/vehicles/check-eligibility`); JSON fields camelCase
 - Entities: singular, PascalCase (`Customer`, `OrderItem`)
 - Attributes: PascalCase; foreign keys end with `Id` (`CustomerId`)
