@@ -21,6 +21,7 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `testing.md` | BDDFramework unit tests — what to test, test data, test users, when to run |
 | `docs/lld/README.md` | LLD documents — Word export, Confluence publishing, setup |
 | `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
+| `review.md` | Reviewing a story's implementation — ticket gaps, layers, external services, DB hits, files, UI |
 | `never-do.md` | Hard limits and lessons learned |
 
 Always work in Development only. Confirm the target environment before any publish or deploy.
