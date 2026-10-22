@@ -22,7 +22,12 @@ outsystems-claude/
 │       ├── block.md           /block create|edit
 │       ├── screen.md          /screen create|edit
 │       ├── api-expose.md      /api-expose create|edit
-│       └── api-consume.md     /api-consume create|edit
+│       ├── api-consume.md     /api-consume create|edit
+│       └── lld.md             /lld create|edit|publish (Word + Confluence)
+├── docs/
+│   ├── lld/                       # Low-Level Designs (Markdown source) — see docs/lld/README.md
+│   └── templates/                 # Word template for the LLD export
+├── scripts/                       # build-lld.ps1, publish-lld.ps1
 ├── prompts/
 │   └── examples/                  # Proven example requests to copy from
 ├── .gitignore
@@ -76,6 +81,9 @@ Build or change a feature one small step at a time, in this order:
 | 6 | `/screen create\|edit` | `_UI` |
 | 7 | `/api-expose create\|edit` (expose an API) | `_API` |
 | 8 | `/api-consume create\|edit` (external endpoint, copying an existing module's pattern) | `_IS` |
+
+When the feature is built and tested, document it: `/lld create`, review the Word file,
+then `/lld publish` to Confluence (setup in `docs/lld/README.md`).
 
 Every `edit` first lists who uses the element, says whether the change is breaking, and
 shows a Before | After plan (rules in `.claude/rules/editing.md`).

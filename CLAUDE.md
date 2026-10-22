@@ -19,6 +19,7 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `coding.md` | Aggregates, pagination, validation, exceptions |
 | `security-roles.md` | Roles, secrets, hard-coded values |
 | `testing.md` | BDDFramework unit tests — what to test, test data, test users, when to run |
+| `docs/lld/README.md` | LLD documents — Word export, Confluence publishing, setup |
 | `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
 | `never-do.md` | Hard limits and lessons learned |
 

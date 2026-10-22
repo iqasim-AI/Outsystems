@@ -10,3 +10,7 @@ secrets/
 # OS files
 .DS_Store
 Thumbs.db
+
+# LLD build output (Word files are attached to Confluence)
+docs/lld/**/_build/
+docs/lld/**/*.docx
