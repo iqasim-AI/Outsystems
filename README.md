@@ -14,6 +14,7 @@ outsystems-claude/
 │   ├── rules/                     # Detailed team rules (architecture, naming, ...)
 │   └── commands/                  # Team slash commands
 │       ├── story.md           /story (user story → commands to run)
+│       ├── story-review.md    /story-review (review what was built for a story)
 │       ├── entity.md          /entity create|edit
 │       ├── crud.md            /crud create|edit
 │       ├── logic.md           /logic create|edit
@@ -91,6 +92,20 @@ Build or change a feature one small step at a time, in this order:
 | 7 | `/api-expose create\|edit` (expose an API) | `_API` |
 | 8 | `/api-consume create\|edit` (external endpoint, copying an existing module's pattern) | `_IS` |
 
+<<<<<<< HEAD
+=======
+**Review a built story:** `/story-review` reads the ticket and the modules that were built,
+checks them against `.claude/rules/review.md`, and lists the fixes as commands. It changes
+nothing. See `prompts/examples/12-story-review.md`.
+
+```
+/story-review <ticket link> <technical comment>
+```
+
+When the feature is built and tested, document it: `/lld create`, review the Word file,
+then `/lld publish` to Confluence (setup in `docs/lld/README.md`).
+
+>>>>>>> 8d263cec4222fba30f2557104b05f4253a5dd928
 Every `edit` first lists who uses the element, says whether the change is breaking, and
 shows a Before | After plan (rules in `.claude/rules/editing.md`).
 See `prompts/examples/09-edit-scenarios.md` for edit requests.
