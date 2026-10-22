@@ -1,0 +1,5 @@
+{
+  "baseUrl": "https://<your-site>.atlassian.net",
+  "spaceKey": "<SPACEKEY>",
+  "lldFolderId": "<id of the LLD folder>"
+}

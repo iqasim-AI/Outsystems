@@ -67,8 +67,11 @@ developer, the user is different or anonymous, so tests need fixed users.
 ## When tests run
 LifeTime deploys but does not run tests or block a deployment. The gate is a team rule:
 1. Run the domain's test suite in Development (every `<ActionName>_Tests` screen).
-2. All scenarios green → create the LifeTime deployment plan to Test.
-3. Note the result (number of scenarios, all passed) on the story or ticket.
+2. All scenarios green.
+3. The feature's LLD is created or updated (`/lld create` or `/lld edit`), with the test
+   results in section 12, and published (`/lld publish`).
+4. Create the LifeTime deployment plan to Test.
+5. Note the result (number of scenarios, all passed, LLD link) on the story or ticket.
 
 A failing test is never deleted or weakened to make it pass. Fix the code, or, if the rule
 changed, change the test in the same change and say so.
