@@ -33,6 +33,20 @@ Screens live in `[Domain]_UI`. If the request names another module, stop and ask
   existing form block if there is one, otherwise build the form; Save calls the `_BL` save
   action (e.g. `<Entity>_Save`); show success/error feedback; go back to the list.
 
+## Portal-specific screen creation rules
+
+Apply these rules only when creating a page in an External portal. First inspect the target application and available modules through MCP.
+
+- Set the screen's Layout to `LayoutTopMenuExternal` from `Eservices_External_Layouts`.
+- In the layout's `MainContent` placeholder, create two containers:
+  1. Container class: `margin-right-l side-list sideMenuWeb`. Place the `SideMenu_External` block from `Infath_UIPattern` inside it.
+  2. Container class: `flex-auto margin-x-l margin-y-m`. Place the page's main content block inside it.
+- In the layout's `Header` placeholder, use the `SideMenu_External` block from `Infath_UIPattern` as specified by the project convention.
+- Do not invent a substitute layout, menu block, or class. If a referenced module, layout, block, or placeholder cannot be found through MCP, stop and report the missing dependency.
+- Do not use inline styles. Use the classes above exactly as written.
+- Use the `Infath_LSGTheme` theme from `Infath_Reactive_Theme` for portals only. Do not apply it to non-portal applications.
+- Apply all general rules from `.claude/rules/ui-design.md`, including `FileUpload`/`SingleUpload`, popup action classes, table skeleton conditions, and Expression `text-primary` styling where applicable.
+
 ## create
 1. Use the OutSystems MCP to check the `_UI` module, existing screens and blocks, and the
    `_BL` actions for this entity. If the same screen exists, stop (I may want `edit`).

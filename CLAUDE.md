@@ -21,9 +21,16 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `testing.md` | BDDFramework unit tests — what to test, test data, test users, when to run |
 | `docs/lld/README.md` | LLD documents — Word export, Confluence publishing, setup |
 | `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
+| `ui-design.md` | UI consistency, responsive design, RTL/LTR, accessibility |
+| `ui-theme-reference.md` | Verified Infath theme fonts, variables, selectors, and known CSS risks |
+| `ui-customization.md` | CSS scoping, cascade safety, and safe theme customization |
 | `never-do.md` | Hard limits and lessons learned |
 
 Always work in Development only. Confirm the target environment before any publish or deploy.
+
+For UI work, use `/ui-change` for a focused change, `/ui-review` for review-only feedback, and `/ui-modernize` for a visual refresh that preserves behaviour. These supplement `/block` and `/screen`; they do not replace them.
+
+Mandatory Infath UI conventions are documented in `.claude/rules/ui-design.md` and `.claude/rules/ui-theme-reference.md`: no inline styles, semantic theme colors, upload/popup/table/expression classes, and the portal-only `Infath_LSGTheme` layout/theme conventions. For External portal page structure, follow `.claude/commands/screen.md`.
 
 ## 3. Integrations
 - REST APIs consumed: [name — purpose — module]

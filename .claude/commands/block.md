@@ -31,6 +31,17 @@ Follow CLAUDE.md and .claude/rules/. Work in Development only.
 - Labels support the language and direction stated in CLAUDE.md. Responsive for desktop and mobile.
 - Reuse the theme: use existing classes; don't invent new CSS if the theme has a class for it.
 
+## Required UI conventions
+
+- Never use inline styles or set OutSystems widget `Style` properties for visual styling. Reuse theme/classes or propose a stylesheet class.
+- For `FileUpload` or `SingleUpload`, set `attachment` on the upload control's container.
+- For popup action containers, use `actions_buttons display-flex justify-content-center`.
+- If a label and its corresponding Expression are both present, give the Expression the `text-primary` class.
+- For tables, show the table only when `IsDataFetched` is true. When false, show `TableSekleton` from `Infath_OutSystemsUI`. Use the existing block and ensure the states are mutually exclusive.
+- Use `var(--color-primary)` for the main system color and `var(--color-secondary)` for the system green; do not hard-code these semantic colors.
+- Use `Infath_LSGTheme` from `Infath_Reactive_Theme` only in portal applications. Confirm the target is a portal before selecting the theme.
+- For External portal page structure, follow the portal-specific rules in `.claude/commands/screen.md`; do not independently invent a different layout/menu structure.
+
 ## create
 1. Use the OutSystems MCP to check existing blocks and the theme first. If the same block
    exists, stop (I may want `edit`). If a `_BL` action it needs is missing, stop and tell me

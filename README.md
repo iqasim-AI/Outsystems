@@ -21,18 +21,27 @@ outsystems-claude/
 │       ├── service-action.md  /service-action create|edit
 │       ├── block.md           /block create|edit
 │       ├── screen.md          /screen create|edit
+│       ├── ui-change.md      /ui-change focused UI/theme change
+│       ├── ui-review.md      /ui-review review UI without editing
+│       ├── ui-modernize.md   /ui-modernize refresh UI, preserve behaviour
 │       ├── api-expose.md      /api-expose create|edit
-│       ├── api-consume.md     /api-consume create|edit
-│       └── lld.md             /lld create|edit|publish (Word + Confluence)
-├── docs/
-│   ├── lld/                       # Low-Level Designs (Markdown source) — see docs/lld/README.md
-│   └── templates/                 # Word template for the LLD export
-├── scripts/                       # build-lld.ps1, publish-lld.ps1
+│       └── api-consume.md     /api-consume create|edit
 ├── prompts/
 │   └── examples/                  # Proven example requests to copy from
 ├── .gitignore
 └── README.md
 ```
+
+### UI rules added
+
+- `.claude/rules/ui-design.md` — consistency, responsive behaviour, RTL/LTR, accessibility.
+- `.claude/rules/ui-theme-reference.md` — verified details from the supplied Infath theme CSS, including fonts, palette, selectors, and CSS risks.
+- `.claude/rules/ui-customization.md` — safe CSS scoping and cascade practices.
+- `/ui-change` plans and implements a focused UI/theme change after approval.
+- `/ui-review` reports UI findings without changing the app.
+- `/ui-modernize` refreshes the visual design while preserving business behaviour.
+
+The existing `/block` and `/screen` commands remain the commands for creating/editing those OutSystems elements. The new UI commands add design and theme-specific guidance rather than replacing them.
 
 ## First-time setup (each developer)
 
@@ -82,9 +91,6 @@ Build or change a feature one small step at a time, in this order:
 | 7 | `/api-expose create\|edit` (expose an API) | `_API` |
 | 8 | `/api-consume create\|edit` (external endpoint, copying an existing module's pattern) | `_IS` |
 
-When the feature is built and tested, document it: `/lld create`, review the Word file,
-then `/lld publish` to Confluence (setup in `docs/lld/README.md`).
-
 Every `edit` first lists who uses the element, says whether the change is breaking, and
 shows a Before | After plan (rules in `.claude/rules/editing.md`).
 See `prompts/examples/09-edit-scenarios.md` for edit requests.
@@ -111,3 +117,11 @@ Both files are in `.gitignore` and are never committed.
 
 - Development environment only. **Never Production.**
 - No passwords, keys or tokens in this repo.
+
+
+### Infath portal conventions
+- Use `Infath_LSGTheme` from `Infath_Reactive_Theme` in portals only.
+- No inline styles. Use `var(--color-primary)` for the main color and `var(--color-secondary)` for green.
+- Apply `attachment` to `FileUpload`/`SingleUpload` containers; popup actions use `actions_buttons display-flex justify-content-center`.
+- Table loading state uses `IsDataFetched` with `TableSekleton` from `Infath_OutSystemsUI`; paired Expressions use `text-primary`.
+- External portal screens use `LayoutTopMenuExternal` from `Eservices_External_Layouts` and the required `SideMenu_External` structure described in `.claude/commands/screen.md`.
