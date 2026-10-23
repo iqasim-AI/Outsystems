@@ -27,6 +27,38 @@ BDDFramework's assert actions.
 - Test modules follow BDDFramework's structure even where it differs from `coding.md`;
   `coding.md` applies to application modules.
 
+## Runner check
+A test exists only if the BDDFramework runner can run it. After publishing a test screen,
+call the runner (below) on Development and read the JSON result.
+- An `ErrorMessage` such as "Could not find TestSuite screen", or zero scenarios counted,
+  means the screen is not a valid BDDFramework test screen. The suite fails; fix the structure.
+- Our apps are Reactive, so the test module is a **Mobile/Reactive module built on the
+  `BDDFramework Client-Side O11` Forge component** (https://www.outsystems.com/forge/component-overview/10917/bddframework-client-side-o11),
+  created from its template (`TestFlow`, `Templates`, `Common`; `Layout` already contains
+  `FinalResult`). The server-side component needs a Traditional Web screen and does not work
+  with a Reactive module ("Could not find TestSuite screen").
+- The test module references the `_BL`/`_SL`/`_CS` module under test (added in Manage
+  Dependencies; the MCP cannot add references) and the action under test must be Public.
+- Structure, copied from `Template_Component_Scenario`: one block per scenario in
+  `TestFlow` (`Scenario_<Name>`) holding a `BDDScenario` instance (ScenarioIdentifier,
+  ScenarioDescription) with `BDDStep` instances for Given / When / Then, each wired to a
+  screen action through the `NotifyRunStepLogic` event; the Then step uses the
+  client-side `AssertValue`. One screen `<ActionName>_Tests` in `TestFlow`, using `Layout`,
+  with the scenario blocks in `MainContent` and the **Anonymous role** (the runner calls it
+  without logging in).
+- Run it through the client-side runner (needs Chromium installed on the server from
+  `/BDDFrameworkMobile/Welcome`; not available in personal environments):
+  `GET /TestRunner_API/rest/v2/BDDTestRunner/<TestModule>/<ScreenName>` returns
+  `IsSuccess`, `SuccessfulScenarios`, `FailedScenarios`, `SkippedScenarios`,
+  `TestScenarioResults[]` (`ScenarioId`, `IsSuccess`, `FailureReport`), `ErrorMessage`.
+  Verified on Development with `OS_AI_BDD` / `calculateTest_Tests` (4 passed; a wrong
+  expected value was reported as `Expected "11" but obtained "10"`).
+- Running a screen in the browser, or a custom button that calls the asserts, does not count.
+- The same call lets the pipeline run the suite (Postman/Newman) and fail on `SuiteSuccess = false`.
+- Test screens need the access the runner requires; set it, don't open them wider than that.
+- Lesson learned: a plain screen with `AssertValue` passed in the browser but the runner
+  returned "Could not find TestSuite screen" (`calculateTest_Tests`, 2026-10-23).
+
 ## Scenarios
 - Scenario names say the case and the expected result:
   `Failed inspection without notes is rejected`.
