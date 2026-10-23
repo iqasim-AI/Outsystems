@@ -30,6 +30,20 @@ and ask before creating the module and application.
   needed and stop.
 - One test screen `<ActionName>_Tests`; step actions named after the step
   (e.g. `Given_DraftRequestForTestInspector`). Reuse existing *Given* steps in the module.
+- **The screen must be a BDDFramework TestSuite screen** that the REST runner can find
+  (see "Runner check" in `testing.md`). A plain screen with our own button and
+  `AssertValue` calls is NOT a test: the runner returns "Could not find TestSuite
+  screen" and runs nothing. Only the assert actions being visible is not enough.
+- **The test module is built on `BDDFramework Client-Side O11`** (see `testing.md`): check
+  it references `BDDFrameworkClientSide` and the module under test (`listApps`, references).
+  If the module under test isn't referenced, ask the user to add it in Manage Dependencies
+  (the MCP can't). If there is no such test module, ask the user to create it from the
+  Forge component; the MCP cannot create modules.
+- **Reference first.** Before creating the first test in a module, read an existing
+  working TestSuite screen with the MCP (another `_Tests` module, or one the user points
+  to) and copy its structure: screen type, blocks, scenario and Given/When/Then wiring,
+  access. If none exists, stop and ask for one (or for the installed BDDFramework
+  version). Never invent the structure.
 
 ## create
 1. If `<ActionName>_Tests` already exists, stop (I may want `edit`).
@@ -37,9 +51,17 @@ and ask before creating the module and application.
    \# | Scenario | Given (data + user) | When | Then (result + data state)
    plus: test users needed, mocks needed, gaps found. Wait for my approval.
 3. After approval: create the steps and scenarios, publish `[Domain]_Tests` to Development,
-   run the screen, and report each scenario as passed or failed. For a failure, show the
-   assert message and say whether the test or the action looks wrong — do not change either
-   without asking.
+   then run the **runner check**: `GET /TestRunner_API/rest/v2/BDDTestRunner/<TestModule>/<ActionName>_Tests`
+   on Development and report each scenario as passed or failed from its JSON (`IsSuccess`,
+   `SuccessfulScenarios`, `FailedScenarios`, `TestScenarioResults[].FailureReport`).
+   Also prove a failure is reported: temporarily set one expected value wrong, publish,
+   confirm the runner reports it as failed, restore, publish and run again.
+   - `ErrorMessage` set, or zero scenarios counted: the suite is NOT working. Report it as
+     failed, fix the screen structure against the reference, and run again. Never report a
+     pass from opening the screen in a browser.
+   - For a failure, show the assert message and say whether the test or the action looks
+     wrong — do not change either without asking.
+   - If the call needs a token or login you don't have, say so and ask; don't skip it.
 
 ## edit
 Follow `.claude/rules/editing.md` where it applies, plus:
@@ -50,5 +72,5 @@ Follow `.claude/rules/editing.md` where it applies, plus:
   rule changed. Never weaken an assertion just to make a test pass.
 - Removing a scenario needs explicit approval.
 - The plan shows the same table with a Change column (Added / Changed / Removed).
-- After approval: change, publish, run the whole screen (not only the changed scenarios),
-  and report the results.
+- After approval: change, publish, run the runner check on the whole screen (not only the
+  changed scenarios), and report the results as in `create`.
