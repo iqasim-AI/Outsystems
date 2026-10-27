@@ -26,9 +26,11 @@ outsystems-claude/
 │       ├── ui-review.md      /ui-review review UI without editing
 │       ├── ui-modernize.md   /ui-modernize refresh UI, preserve behaviour
 │       ├── api-expose.md      /api-expose create|edit
-│       └── api-consume.md     /api-consume create|edit
+│       ├── api-consume.md     /api-consume create|edit
+│       └── notification-template.md  /notification-template create
 ├── prompts/
 │   └── examples/                  # Proven example requests to copy from
+├── scripts/                       # LLD and notification helper scripts
 ├── .gitignore
 └── README.md
 ```
@@ -91,9 +93,8 @@ Build or change a feature one small step at a time, in this order:
 | 6 | `/screen create\|edit` | `_UI` |
 | 7 | `/api-expose create\|edit` (expose an API) | `_API` |
 | 8 | `/api-consume create\|edit` (external endpoint, copying an existing module's pattern) | `_IS` |
+| 9 | `/notification-template create` (record + Excel + timer for a notification) | `Eservices_Notification_Engine_CS` |
 
-<<<<<<< HEAD
-=======
 **Review a built story:** `/story-review` reads the ticket and the modules that were built,
 checks them against `.claude/rules/review.md`, and lists the fixes as commands. It changes
 nothing. See `prompts/examples/12-story-review.md`.
@@ -105,7 +106,6 @@ nothing. See `prompts/examples/12-story-review.md`.
 When the feature is built and tested, document it: `/lld create`, review the Word file,
 then `/lld publish` to Confluence (setup in `docs/lld/README.md`).
 
->>>>>>> 8d263cec4222fba30f2557104b05f4253a5dd928
 Every `edit` first lists who uses the element, says whether the change is breaking, and
 shows a Before | After plan (rules in `.claude/rules/editing.md`).
 See `prompts/examples/09-edit-scenarios.md` for edit requests.

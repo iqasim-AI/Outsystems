@@ -21,13 +21,11 @@ The detailed rules are in `.claude/rules/`. Read the one that matches your task:
 | `testing.md` | BDDFramework unit tests — what to test, test data, test users, when to run |
 | `docs/lld/README.md` | LLD documents — Word export, Confluence publishing, setup |
 | `editing.md` | Changing existing elements — impact check, breaking changes, publish order |
-<<<<<<< HEAD
 | `ui-design.md` | UI consistency, responsive design, RTL/LTR, accessibility |
 | `ui-theme-reference.md` | Verified Infath theme fonts, variables, selectors, and known CSS risks |
 | `ui-customization.md` | CSS scoping, cascade safety, and safe theme customization |
-=======
 | `review.md` | Reviewing a story's implementation — ticket gaps, layers, external services, DB hits, files, UI |
->>>>>>> 8d263cec4222fba30f2557104b05f4253a5dd928
+| `notifications.md` | Notification templates — naming, Excel columns, channels, Id, timer, how to send |
 | `never-do.md` | Hard limits and lessons learned |
 
 Always work in Development only. Confirm the target environment before any publish or deploy.
